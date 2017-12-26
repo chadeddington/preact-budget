@@ -1,0 +1,20 @@
+.wrapper {
+  padding: 56px 20px;
+	min-height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.formLayout {
+  display: flex;
+  width: 350px;
+  margin-bottom: 10px;
+}
+
+.formLayout > label {
+  flex: 1;
+}
+
+.formLayout > input {
+  width: 150px;
+}

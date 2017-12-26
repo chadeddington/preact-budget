@@ -4,8 +4,10 @@ import { Router } from 'preact-router';
 import Header from './header';
 import Home from '../routes/home';
 import BudgetsView from '../routes/budgetsview';
+import NewBudget from '../routes/newbudget';
 // import Home from 'async!./home';
 // import Profile from 'async!./budgetsview';
+// import NewBudget from 'async!./newbudget';
 
 export default class App extends Component {
   state = {
@@ -21,15 +23,25 @@ export default class App extends Component {
 	handleRoute = e => {
 		this.currentUrl = e.url;
   };
+
+  handleAddBudget = (e) => {
+    let newbudgets = this.state.budgets;
+    newbudgets.push(e.detail.budget);
+    this.setState({budgets: newbudgets});
+  }
+
+  handleBudgetUpdate = (e) => {
+    const data = e.detail;
+    const current = this.state.budgets[data.budgetIndex].current;
+    let newBudgets = [];
+    newBudgets = newBudgets.concat(this.state.budgets);
+    newBudgets[data.budgetIndex].current = current + parseInt(data.amount);
+    this.setState({budgets: newBudgets});
+  }
   
 	componentDidMount() {
-    console.log('add listener');
-    document.addEventListener('add-budget', e => {
-      console.log('budget event', e.detail.budget);
-      let newbudgets = this.state.budgets;
-      newbudgets.push(e.detail.budget);
-      this.setState({budgets: newbudgets});
-    })
+    document.addEventListener('add-budget', this.handleAddBudget.bind(this));
+    document.addEventListener('save-budget-update', this.handleBudgetUpdate.bind(this));
 	}
 
 	render({  }, { budgets }) {
@@ -40,7 +52,7 @@ export default class App extends Component {
 				<Router onChange={this.handleRoute}>
 					<Home path="/" budgets={budgets} />
 					<BudgetsView path="/budgets/" budgets={budgets}/>
-					<BudgetsView path="/budgets/:person" />
+          <NewBudget path="/newbudget" />
 				</Router>
 			</div>
 		);

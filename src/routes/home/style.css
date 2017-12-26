@@ -8,20 +8,52 @@ p {
   font-size: 22px;
 }
 
-input {
+input, label, p {
   font-size: 22px;
+}
+
+input[type=submit] {
+  background-color: #0be466;
+  border: none;
+  padding: 5px 20px;
+  width: 150px;
+  box-shadow: 1px 2px grey;
+  border-radius: 3px;
+}
+
+input[type=submit]:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.h1 {
+  font-size: 36px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 20px;
+  width: 300px;
+}
+
+.entry {
+  width: 100px;
+}
+
+.submit {
+  margin-top: 20px;
 }
 
 .home {
 	padding: 56px 20px;
 	min-height: 100%;
-	width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .detailsWrapper {
   display: flex;
   justify-content: space-around;
-  width: 400px;
+  width: 350px;
 }
 
 .detailItem {
